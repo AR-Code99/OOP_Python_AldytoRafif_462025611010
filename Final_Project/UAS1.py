@@ -23,7 +23,7 @@ class FileHelper:
                     writer.writerow(["Kendaraan", barang.id_barang, barang.nama, barang.jumlah, barang.get_status(), barang.plat_nomor])
 
     @staticmethod
-    def muat_dari_csv():
+    def file_csv():
         daftar_sementara = []
         if os.path.exists(FileHelper.file_name):
             with open(FileHelper.file_name, mode='r') as file:
@@ -44,6 +44,17 @@ class FileHelper:
                         daftar_sementara.append(Kendaraan(id_brg, nama, jumlah, status, ekstra))
                         
         return daftar_sementara
+
+class Akun:
+    def __init__(self, username, password):
+        self.username = username
+        self.__password = password 
+
+    def cek_login(self, input_password):
+        if self.__password == input_password:
+            return True
+        else:
+            return False
 
 class Barang:
     def __init__(self, id_barang, nama, jumlah, status):
@@ -96,10 +107,25 @@ class Kendaraan(Barang):
     def __str__(self):
         return super().__str__() + f" | Plat No: {self.plat_nomor}"
 
-
-daftar_inventaris = FileHelper.muat_dari_csv()
-
 daftar_terbaru = []
+
+admin = Akun("admin", "password123")
+daftar_inventaris = FileHelper.file_csv()
+
+print("="*36)
+print("SELAMAT DATANG DI SISTEM INVENTARIS")
+print("="*36)
+
+login_berhasil = False
+while not login_berhasil:
+    input_user = input("Username: ")
+    input_pass = input("Password: ")
+    
+    if input_user == admin.username and admin.cek_login(input_pass):
+        print("\nLogin Berhasil\n")
+        login_berhasil = True
+    else:
+        print("Username atau Password salah, silakan coba lagi.\n")
 
 print("SISTEM PENGAUDITAN BARANG INVENTARIS")
 
