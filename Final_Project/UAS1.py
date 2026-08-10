@@ -13,7 +13,6 @@ class FileHelper:
             writer = csv.writer(file)
             writer.writerow(["Kategori", "ID", "Nama", "Jumlah", "Status", "Ekstra"])
             
-            # Tulis data barang satu per satu
             for barang in daftar_barang:
                 if isinstance(barang, BarangElektronik):
                     writer.writerow(["Elektronik", barang.id_barang, barang.nama, barang.jumlah, barang.get_status(), barang.garansi_tahun])
