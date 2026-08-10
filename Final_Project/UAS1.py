@@ -114,11 +114,11 @@ while True:
         print("\nInput Data Barang")
         kode = input("Masukkan Kode Barang: ")
         nama = input("Masukkan Nama Barang: ")
+
         
-        # 5. Exception Handling (try-except)
         try:
             jumlah = int(input("Masukkan Jumlah Barang: "))
-            Barang.validasi_jumlah(jumlah) # Memanggil static method dan custom exception
+            Barang.validasi_jumlah(jumlah)
         except ValueError:
             print("ERROR: Input jumlah harus berupa angka")
             continue
